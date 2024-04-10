@@ -31,7 +31,12 @@ public class DocenteServiceImpl implements DocenteService {
 			this.mensagem = "Digite o nome do docente.";
 			throw new Exception("Preencha o nome docente.");
 		} else {
-			docenteRepository.saveAndFlush(docenteEntity);
+			
+			docenteRepository.incluirDocente(docenteEntity.getNome(),
+					docenteEntity.getSobrenome(),
+					docenteEntity.getCpf(),
+					docenteEntity.getEmail(),
+					docenteEntity.getSetor().getIdSetor());
 			this.mensagem = "Docente cadastrado com sucesso";
 		}
 		return mensagem;
@@ -40,7 +45,7 @@ public class DocenteServiceImpl implements DocenteService {
 	@Override
 	public List<DocenteEntity> findAll() {
 		
-		return docenteRepository.findAll();
+		return docenteRepository.listarDocentes();
 	}
 
 	@Override
