@@ -31,9 +31,21 @@ void excluirDocente(@Param("id_docente") Long idDocente);
 @Transactional
 @Query(value = "insert into horario.docente (nome,sobrenome,cpf,email,setor_id) VALUES (:nome,:sobrenome,:cpf,:email,:setor_id)", nativeQuery = true)
 void incluirDocente(@Param("nome") String nome,
-		@Param("sobrenome") String sobrenome,
+		@Param("sobrenome") String sobreNome,
 		@Param("cpf") String cpf,
 		@Param("email") String email,
-		@Param("setor_id") Long id);
+		@Param("setor_id") Long setorId);
+
+@Modifying
+@Transactional
+@Query(value ="update horario.docente"
++ "set nome = ?1,"
++ "sobrenome = ?2,"
++ "cpf = ?3,"
++ "email = ?4,"
++ "setor_id = ?5"
++ "where id_docente=?6 ", nativeQuery = true)
+
+void alterarDocente(String nome, String sobreNome, String cpf, String email, Long setorId, Long idDocente);
 
 }
